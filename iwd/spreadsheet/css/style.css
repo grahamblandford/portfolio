@@ -1,0 +1,58 @@
+/*  Name:    style.css
+    By:      Graham Blandford
+    Date:    2020-10-20
+    Purpose: Styling for INFO-3144-02-20F Project 1
+
+*/
+
+body {
+    background-color: #BFC9DC;
+    margin: 20px 0 0 20px;
+}
+
+.TableClass {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 9.0pt;
+    margin-top: 10px;
+}
+
+.BaseColumn, th {
+    text-align: center;
+    width: 40px;
+}
+
+.BaseRow {
+    text-align: center;
+    height: 25px;
+}
+
+.AlphaColumn {
+    width: 80px;
+    height: 25px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    border: 1px solid #002d96;
+    padding-left: 3px;
+}
+
+#lbl-formula {
+    width: 30px;
+}
+
+input[type = button] {
+    width: 80px;
+    margin-top: 20px;
+    margin-left: 5px;
+}
+div {
+    margin-bottom: 10px;
+}
+
+#cell-entry, #div-errors {
+    display: inline;
+    height: 100px;
+}
+.alert {
+    max-width: 55%;
+    margin-right: 30px;
+}
