@@ -1,0 +1,3 @@
+C:\Users\Graham\Documents\FANSHAWE\IWD\3\INFO-3144-02-20F - Applied Javascript Tools and Frameworks\Project 2\Customers\obj\Debug\Customers.njsproj.CoreCompileInputs.cache
+C:\Users\Graham\Documents\FANSHAWE\IWD\3\INFO-3144-02-20F - Applied Javascript Tools and Frameworks\Project 2\Customers\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\Graham\Documents\FANSHAWE\IWD\3\INFO-3144-02-20F - Applied Javascript Tools and Frameworks\Project 2\Customers\obj\Debug\Customers.njsprojAssemblyReference.cache

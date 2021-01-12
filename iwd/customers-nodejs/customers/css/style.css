@@ -1,0 +1,77 @@
+.backgroundColor {
+    background: lightgray;
+}
+
+.fontColor {
+    color: darkblue;
+}
+
+
+body {
+    font-family: 'Metrophobic', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.form-inline {
+    margin-top: 30px;
+    display: inline-block;
+}
+
+.form-group {
+    margin-bottom: 10px !important;
+}
+
+.form-check-inline {
+    margin: 5px 15px;
+}
+
+label {
+    width: 120px;
+    justify-content: left !important;
+}
+
+.label-checkbox {
+    width: 80px !important;
+}
+
+input[type=text] {
+    width: 280px;
+}
+
+select {
+    min-width: 285px;
+}
+fieldset {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+legend {
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 5px; /* solid darkblue;*/
+}
+
+h1, h2 {
+    margin: 20px;
+}
+
+.btn {
+    margin-left: 10px;
+}
+
+.btn :not(#btn-search) {
+    margin-top: 15px;
+}
+
+/* Scroll bars for modal */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+}
