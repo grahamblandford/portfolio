@@ -20,7 +20,7 @@ This project was completed to demonstrate the manipulation of the DOM using vani
 
 ![https://github.com/grahamblandford/portfolio/blob/master/iwd/spreadsheet/preview.PNG](https://github.com/grahamblandford/portfolio/blob/master/iwd/spreadsheet/preview.PNG)
 
-[View](https://info-3144-project--1.web.app/) [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/spreadsheet)
+[View](https://info-3144-project--1.web.app/) / [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/spreadsheet)
 
 ## Device Info - Object Classes 
 
@@ -28,4 +28,4 @@ This project was completed to demonstrate the use of Javascript Classes for obje
 
 ![https://github.com/grahamblandford/portfolio/blob/master/iwd/object-classes/preview.PNG](https://github.com/grahamblandford/portfolio/blob/master/iwd/object-classes/preview.PNG)
 
-[View](https://info-3144-project--1.web.app/) [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/object-classes)
+[View](https://info-3114-project-2.web.app/) / [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/object-classes)
