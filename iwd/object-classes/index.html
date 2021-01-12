@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+            Name: Graham Blandford
+            Date: 2020-05-27
+            Purpose: INFO 3114-01-20S Project 2
+        -->
+        <title>INFO-3114-01-20S Project 2</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="INFO-3114-01-20S Project 2">
+        <meta name="author" content="Graham Blandford">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/style.css">
+        
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="jumbotron" style="background-color: transparent !important;">
+            <h1 class="display-4 bg-primary text-white">INFO-3114 Project 2</h1>
+        </div>
+        <div class="container-group">
+            <div id="container-video" class="container-fluid pt-3 bg-primary text-white">
+                <h3 id="video-header">Video Devices</h3>
+
+                    <!-- Device Name -->
+                    <div class="form-inline">
+                        <label for="video-devicename">Device Name:</label>
+                        <input type="text" class="form-control" id="video-device-name" data-name="deviceName" required placeholder="The device name" aria-describedby="devicenameHelp">
+                    </div>
+    
+                    <!-- Replacement Cost $ -->
+                    <div class="form-inline">
+                        <label for="video-cost">Replacement $:</label>
+                        <input type="text" class="form-control" id="video-cost" data-name="replacementCost" required placeholder="The replacement cost of this device" aria-describedby="costHelp">
+                    </div>
+    
+                    <!-- Supplier Name -->
+                    <div class="form-inline">
+                        <label for="video-supplier">Supplier:</label>
+                        <input type="text" class="form-control" id="video-supplier" data-name="supplierName" required placeholder="The supplier name" aria-describedby="supplierHelp">
+                    </div>
+    
+                    <!-- Serial No. -->
+                    <div class="form-inline">
+                        <label for="video-serial">Serial No.:</label>
+                        <input type="text" class="form-control" id="video-serial" data-name="serialNumber" required placeholder="The serial number" aria-describedby="serialHelp">
+                    </div>
+    
+                    <!-- Resolution -->
+                    <div class="form-inline">
+                        <label for="video-resolution">Resolution:</label>
+                        <input type="text" class="form-control" id="video-resolution" data-name="resolution" required placeholder="What is the screen resolution. E.g. 1200 x 720" aria-describedby="serialHelp">
+                    </div>
+    
+                    <!-- Type -->
+                    <div class="form-inline">
+                        <label for="video-type">Type:</label>
+                        <select class="form-control" id="video-type" data-name="type" required selected="" aria-describedby="typeHelp">
+                            <option disabled selected value></option>
+                            <option>LED</option>
+                            <option>LCD</option>
+                            <option>Plasma</option>
+                            <option>CRT</option>
+                        </select>
+                    </div>
+                    <div class="btn-group mr-2" id="video-buttons" role="group">
+                        <button type="button" id="video-btn-prev"   class="btn btn-primary">Prev</button>
+                        <button type="button" id="video-btn-next"   class="btn btn-primary">Next</button>
+                        <button type="button" id="video-btn-new"    class="btn btn-primary">New</button>
+                        <button type="button" id="video-btn-update" class="btn btn-primary">Update</button>
+                        <button type="button" id="video-btn-cancel" class="btn btn-primary">Cancel</button>
+                    </div>
+                    <br>
+                    <br>
+                    <!-- Enabled -->
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="video-status">Enabled</label>
+                        <input type="checkbox"  class="form-check-input" id="video-status" data-name="status">
+                    </div>                    
+                    <div class="container-group">
+                        <div id="video-errors" class="errors"></div>
+                    </div>
+            </div>
+            
+            <div id="container-hdd" class="container-fluid pt-3 bg-primary text-white">
+                <h3 id="hdd-header">Hard Disks</h3>
+
+                    <!-- Device Name -->
+                    <div class="form-inline">
+                        <label for="hdd-device-name">Device Name:</label>
+                        <input type="text" class="form-control" id="hdd-device-name" data-name="deviceName" required placeholder="The device name" aria-describedby="devicenameHelp">
+                    </div>
+    
+                    <!-- Replacement Cost $ -->
+                    <div class="form-inline">
+                        <label for="hdd-cost">Replacement $:</label>
+                        <input type="text" class="form-control" id="hdd-cost" data-name="replacementCost" required placeholder="The replacement cost of this device" aria-describedby="costHelp">
+                    </div>
+    
+                    <!-- Supplier Name -->
+                    <div class="form-inline">
+                        <label for="hdd-supplier">Supplier:</label>
+                        <input type="text" class="form-control" id="hdd-supplier" data-name="supplierName" required placeholder="The supplier name" aria-describedby="supplierHelp">
+                    </div>
+    
+                    <!-- Serial No. -->
+                    <div class="form-inline">
+                        <label for="hdd-serial">Serial No.:</label>
+                        <input type="text" class="form-control" id="hdd-serial" data-name="serialNumber" required placeholder="The serial number" aria-describedby="serialHelp">
+                    </div>
+    
+                    <!-- Size -->
+                    <div class="form-inline">
+                        <label for="hdd-size">Size:</label>
+                        <input type="text" class="form-control" id="hdd-size" data-name="size" required placeholder="The disk capacity. E.g. 1TB" aria-describedby="sizeHelp">
+                    </div>
+    
+                    <!-- Transfer Rate -->
+                    <div class="form-inline">
+                        <label for="hdd-txrate">Transfer Rate:</label>
+                        <input type="text" class="form-control" id="hdd-txrate" data-name="transferRate" required placeholder="Transfer rate, e.g. 7Gb/sec" aria-describedby="txrateHelp">
+                    </div>
+    
+                    <!-- Platter Size -->
+                    <div class="form-inline">
+                        <label for="hdd-platter-size">Platter Size:</label>
+                        <input type="text" class="form-control" id="hdd-platter-size" data-name="platterSize" required placeholder='The disk form, e.g. 2.5"' aria-describedby="plattersizeHelp">
+                    </div>
+    
+                    <!-- Number Platters -->
+                    <div class="form-inline">
+                        <label for="hdd-number-platters">No. of Platters:</label>
+                        <input type="text" class="form-control" id="hdd-number-platters" data-name="numberPlatters" required placeholder="No. of platters" aria-describedby="numberplattersHelp">
+                    </div>
+
+                    <div class="btn-group mr-2" id="hdd-buttons" role="group">
+                        <button type="button" id="hdd-btn-prev" class="btn btn-primary">Prev</button>
+                        <button type="button" id="hdd-btn-next" class="btn btn-primary">Next</button>
+                        <button type="button" id="hdd-btn-new" class="btn btn-primary">New</button>
+                        <button type="button" id="hdd-btn-update" class="btn btn-primary">Update</button>
+                        <button type="button" id="hdd-btn-cancel" class="btn btn-primary">Cancel</button>
+                    </div>
+                    <br>
+                    <br>
+                    <!-- Enabled -->
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="hdd-status">Enabled</label>
+                        <input type="checkbox"  class="form-check-input" id="hdd-status" data-name="status">
+                    </div>
+                    <div class="container-group">
+                        <div id="hdd-errors" class="errors"></div>
+                    </div>                    
+            </div>
+
+            <div id="container-ssd" class="container-fluid pt-3 bg-primary text-white">
+                <h3 id="ssd-header">Solid State Drives</h3>
+
+                    <!-- Device Name -->
+                    <div class="form-inline">
+                        <label for="ssd-devicename">Device Name:</label>
+                        <input type="text" class="form-control" id="ssd-devicename" data-name="deviceName" required placeholder="The device name" aria-describedby="devicenameHelp">
+                    </div>
+    
+                    <!-- Replacement Cost $ -->
+                    <div class="form-inline">
+                        <label for="ssd-cost">Replacement $:</label>
+                        <input type="text" class="form-control" id="ssd-cost" data-name="replacementCost" required placeholder="The replacement cost of this device" aria-describedby="costHelp">
+                    </div>
+    
+                    <!-- Supplier Name -->
+                    <div class="form-inline">
+                        <label for="ssd-supplier">Supplier:</label>
+                        <input type="text" class="form-control" id="ssd-supplier" data-name="supplierName" required placeholder="The supplier name" aria-describedby="supplierHelp">
+                    </div>
+    
+                    <!-- Serial No. -->
+                    <div class="form-inline">
+                        <label for="ssd-serial">Serial No.:</label>
+                        <input type="text" class="form-control" id="ssd-serial" data-name="serialNumber" required placeholder="The serial number" aria-describedby="serialHelp">
+                    </div>
+    
+                    <!-- Size -->
+                    <div class="form-inline">
+                        <label for="ssd-size">Size:</label>
+                        <input type="text" class="form-control" id="ssd-size" data-name="size" required placeholder="The disk capacity. E.g. 1TB" aria-describedby="sizeHelp">
+                    </div>
+    
+                    <!-- Transfer Rate -->
+                    <div class="form-inline">
+                        <label for="ssd-txrate">Transfer Rate:</label>
+                        <input type="text" class="form-control" id="ssd-txrate" data-name="transferRate" required placeholder="Transfer rate, e.g. 7Gb/sec" aria-describedby="txrateHelp">
+                    </div>
+
+                    <div class="form-inline">
+                        <label for="ssd-type">Type:</label>
+                        <select class="form-control" id="ssd-type" data-name="type" required selected="" aria-describedby="typeHelp">
+                            <option disabled selected value></option>
+                            <option>Flash</option>
+                            <option>DRAM</option>
+                        </select>
+                    </div
+                    >
+                    <!-- Wear-leveling -->
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="ssd-wearlevel">Wear Leveling</label>
+                        <input type="checkbox"  class="form-check-input" id="ssd-wearlevel" data-name="wearLeveling">
+                    </div>
+                    <br><br>
+
+                    <div class="btn-group mr-2" id="ssd-buttons" role="group">
+                        <button type="button" id="ssd-btn-prev" class="btn btn-primary">Prev</button>
+                        <button type="button" id="ssd-btn-next" class="btn btn-primary">Next</button>
+                        <button type="button" id="ssd-btn-new" class="btn btn-primary">New</button>
+                        <button type="button" id="ssd-btn-update" class="btn btn-primary">Update</button>
+                        <button type="button" id="ssd-btn-cancel" class="btn btn-primary">Cancel</button>
+                    </div>
+                    <br>
+                    <br>
+                    <!-- Enabled -->
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="ssd-status">Enabled</label>
+                        <input type="checkbox"  class="form-check-input" id="ssd-status" data-name="status">
+                    </div>
+                    <div class="container-group">
+                        <div id="ssd-errors" class="errors"></div>
+                    </div>  
+
+            </div>
+        </div>
+
+        <!-- Custom JS -->
+        <script src="./js/script.js"></script>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>

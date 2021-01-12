@@ -1,0 +1,134 @@
+/*  Name:    Graham Blandford
+    Date:    August 5th, 2020
+    Purpose: Styling for INFO-3114-01-20S Project 2
+
+    Adopts Mobile-first design
+*/
+
+body {
+    background-color: rgba(189, 197, 207, 0.836) !important;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: smaller; 
+    padding: 0 20px 0 20px;
+}
+
+nav, div, fieldset, section, aside, footer {
+    display: block;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h3 {
+    padding-bottom: 20px;
+}            
+
+.jumbotron {
+    padding: 0 0 5px 0;
+    margin: 15px 0 5px 0;
+}
+
+.display-4 {
+    color: whitesmoke;
+    background-color: rgba(5, 50, 109, 0.836) !important;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+} 
+
+.form-inline {
+    margin-bottom: 10px;
+}
+
+.form-group input, .form-inline input {
+    display: inline-block;
+}
+
+.form-inline input {
+    max-width: 70% !important;
+    width: 65% !important;
+}
+
+.form-inline select {
+    width: 100px;
+    min-width: 100px;
+}
+
+.form-inline .form-check-inline {
+    width: 100px;
+    min-width: 100px;
+}
+
+.form-inline input::placeholder {
+    opacity: 65%;
+}
+
+.btn-group {
+    align-items: center;
+    margin-top: 20px;
+}
+button {
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+.form-group label, .form-inline label, .form-check-inline label {
+    color: whitesmoke;
+    display: inline-block;
+    width: 100px;
+    margin-right: 8px;
+} 
+
+.container, .container-fluid {
+    background-position-x: center;
+    background-repeat: repeat ;
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+    margin-right: 25px;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    float: left;  
+}
+.container-fluid:last-of-type {
+    margin-right: 0;
+} 
+
+#container-video {
+    background-image: linear-gradient(to top, rgba(33, 44, 104, 0.712), rgba(5, 50, 109, 0.836)), url(../images/video.jpg);
+    background-size: 550px;
+}
+
+#container-hdd {
+    background-image: linear-gradient(to top, rgba(33, 44, 104, 0.712), rgba(5, 50, 109, 0.836)), url(../images/hdd.jpg);
+    background-size: 550px;
+}
+
+#container-ssd {
+    background-image: linear-gradient(to top, rgba(33, 44, 104, 0.712), rgba(5, 50, 109, 0.836)), url(../images/ssd.jpg);
+    background-size: 600px;
+}
+
+.errors {
+    width: auto;
+    margin: 10px 0 5px 0; 
+}
+
+/* Full browser */
+@media screen and (min-width: 1290px) {
+
+    .container {
+        width: 100%;
+    }
+
+    .container-fluid {
+        width: 32% !important; /* 3 containers shown */
+        margin-bottom: 20px;
+        float: left;
+        padding-left: 15px !important;
+    }
+}
