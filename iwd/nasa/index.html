@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+            Name: Graham Blandford
+            Date: 2020-05-27
+            Purpose: INFO 3114-01-20S Project 1 - APOD API
+                     Demonstrates API usage with the NASA APOD API. 
+                     The APOD API returns daily content.
+                     Returns either a high-definition
+                     image or a video.
+        -->
+        <title>INFO-3114-01-20S Project 1</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="INFO-3114-01-20S Project 1">
+        <meta name="author" content="Graham Blandford">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">        <!-- Styling for Responsive / Mobile-first -->
+        <style>
+            body {
+                background-color: black;
+                background-image: url("background.jpg"); /* Source: https://www.publicdomainpictures.net/en/view-image.php?image=71846&picture=starfield-background */
+                color: #e7e7e7;
+                font-family: 'Space Mono', Arial, sans-serif;               
+            }
+
+            nav, div, section, aside, footer {
+                display: block;
+            }
+
+            .display-4 {
+                font-weight: bold;
+                text-align: center;
+            }
+
+            h2 {
+                margin-top: 10px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            h3 {
+                margin-top: 20px;
+            }
+
+            .copyright {
+                text-align: center;
+            }            
+
+            .form-group {
+                white-space: no-wrap;
+            }
+
+            .form-group input {
+                width: 175px;
+                display: inline-block;
+                margin-right: 5px;
+            }
+
+            .form-group label {
+                width: 110px;
+                display: inline-block;
+                margin-right: 0;
+            }
+
+            .form-group button {
+                display: inline-block;
+                margin: 8px 0 10px 118px;
+            }
+
+            .content-nasa {
+                min-width: 350px;
+                min-height: 350px;
+                max-width: 90%;
+                margin-bottom: 20px;
+                border: 0;
+                float: left;
+            }
+
+            #div-content-output {
+                margin: 0 0 100px 0;
+                float: left;
+            }
+            .explain {
+                float: right;
+                text-align: justify;
+            }
+
+            .copyright {
+                float: right;
+                text-align: center;
+            }
+
+            .alert {
+                display: inline-block;
+            }
+
+            .form-control.start-date, .form-control.end-date {
+                margin-top: 5px;
+                width: 58px;
+                padding: 0 0;
+                display: inline-block;
+            }
+
+            #start-year, #end-year {
+                width: 80px;
+            }
+
+            /* Browser 900px Forces Date control Wrap */
+            @media screen and (min-width: 900px) {
+
+                .div-select-dates {
+                    display: inline;
+                }
+
+                #start-year {
+                    margin-right: 20px;
+                }
+
+                #btn-get-content {
+                    margin-left: 20px
+                }
+            }
+
+            /* Full browser */
+            @media screen and (min-width: 550px) {
+
+                .content-nasa {
+                    margin: 0 20px 0 0; 
+                    max-width: 50%;
+                }
+                .explain {
+                    float: none;
+                    text-align: justify;
+                    padding-left: 10px;
+                }
+            }
+        </style>        
+    </head>
+
+    <body>
+        <div class="jumbotron" style="background-color: transparent !important;">
+            <h1 class="display-4">INFO-3114 Project 1</h1>
+            <h2>NASA APOD API Usage</h1>
+            
+            <!-- Form for user input -->
+            <form>
+                <fieldset>
+                    <div class="form-group">
+
+                        <!-- Create date controls using select elements-->
+                        <div class="div-select-dates" id="select-dates-1">
+                            <label for="start-date">Start Date:</label>
+                            <select class="form-control start-date" id="start-day"   name="start-day" aria-describedby="startDateHelp"></select>
+                            <select class="form-control start-date" id="start-month" name="start-month" aria-describedby="startDateHelp"></select>
+                            <select class="form-control start-date" id="start-year"  name="start-year" aria-describedby="startDateHelp"></select>
+                        </div>
+                        <div class="div-select-dates" id="select-dates-2">
+                            <label for="end-date">End Date:</label>
+                            <select class="form-control end-date" id="end-day"   name="end-day" aria-describedby="startDateHelp"></select>
+                            <select class="form-control end-date" id="end-month" name="end-month" aria-describedby="startDateHelp"></select>
+                            <select class="form-control end-date" id="end-year"  name="end-year" aria-describedby="startDateHelp"></select>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" id="btn-get-content">
+                            Get Content
+                        </button>
+                        <div id="div-errors"></div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <!-- Div for output -->
+            <div id="div-content-output">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" id="btn-select-content" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: none;"> 
+                        Please select..
+                    </button>                          
+                    <div class="dropdown-menu" id="div-select-content-dropdown" aria-labelledby="btn-select-content">
+                    </div>                          
+                </div>
+                <div id="div-content">
+                    <div id="content-title"></div>
+                    <div id="content-click"></div>
+                    <div id="content-visual"></div>
+                    <div id="content-explanation"></div>
+                    <div id="content-copyright"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+
+            // Setup constants
+            const API_URL = "https://api.nasa.gov/planetary/apod";
+            const API_KEY = "LJQMCcB7A6ePvN1fk1gcvtH3dayT6JguL2cyvXeN";
+
+            // Setup array for data
+            var nasaContent = [];
+
+            // Dates to control selection
+            // Default to current Date
+            var endDate = new Date();
+            endDate.setDate(endDate.getDate());
+
+            var startDate = new Date();
+            startDate.setDate(endDate.getDate() - 7); // 7 days default
+
+            // Event handlers
+            // 'Get Content' Button
+            document.getElementById("btn-get-content").addEventListener("click", getContent);
+
+            // Populate 'Date controls'
+            setupDateControls();
+            
+            // Date handlers
+            // If we change the month or year, we need to validate
+            Array.prototype.forEach.call(document.getElementsByClassName("start-date"), ( function(e) {e.addEventListener("change",function() {dateChangeHandler(e)})}));
+            Array.prototype.forEach.call(document.getElementsByClassName("end-date"), ( function(e) {e.addEventListener("change",function() {dateChangeHandler(e)})}));
+
+            // Object constructor for
+            // a NASA image
+            function NasaContent(date, explanation, hdurl, media_type, title, url, copyright, concepts, service_version) {
+                this.date = date;
+                this.explanation = explanation;
+                this.hdurl = hdurl;
+                this.media_type = media_type;
+                this.title = title;
+                this.url = url;
+                this.copyright = copyright;
+                this.concepts = concepts;
+                this.service_version = service_version;
+            }
+
+            // Function to load the images based on
+            // the current selection
+            function getContent() {
+
+                // Hide Select dropdown while
+                // we load the new data
+                document.getElementById("btn-select-content").style.display = "none";
+
+                // And clear old content
+                clearContent();
+
+                // Get date from controls
+                var startDate = new Date( document.getElementById("start-year").value + "-" + document.getElementById("start-month").value + "-" + document.getElementById("start-day").value)
+                var endDate = new Date( document.getElementById("end-year").value + "-" + document.getElementById("end-month").value + "-" + document.getElementById("end-day").value)
+
+                // Make the API call & load
+                // the data
+                makeAPIRequest(startDate, endDate);
+            }
+
+            // Function to read the JSON object
+            // & load into our array (keeps data clean)
+            function loadNASAData (json) {
+
+                // Clear the array
+                nasaContent = []; 
+
+                // Iterate through the JSON response
+                for (i = 0; i < json.length; i++)
+                {
+                    // Element 
+                    var content = json[i];
+
+                    // Add the image to the array
+                    // We check for copyright here; IF it is undefined, we replace with 'Unknown'
+                    nasaContent.push(new NasaContent(content.date, content.explanation, (content.hdurl !== undefined)?content.hdurl:"", content.media_type, content.title, (content.url !== undefined)?content.url:"", (content.copyright !== undefined)?content.copyright:"Unknown", content.concepts, content.service_version));
+                }
+
+                // Load the Dropdown
+                loadContent();
+            }
+
+            // Function to load the
+            // dropdown contents from the array
+            function loadContent() {
+
+                // HTML variable
+                var optionHTML = '';
+
+                var dropdown = document.getElementById("div-select-content-dropdown");
+
+                // Iterate through the array
+                for (var i = 0; i < nasaContent.length; i++)
+                {
+                    // Create dropdown item
+                    // with respective title
+                    // Indicate where the choice is a video
+                    // because they are cool! 
+                    optionHTML += ('<button class="dropdown-item" type="button" onclick="showContent(' 
+                        + i.toString() + ');">' + nasaContent[i].title 
+                        + ' ' 
+                        + ( (nasaContent[i].media_type == "video" )?'(video)':'' ) 
+                        + '</button>');
+                }
+
+                // Add HTML options to the dropdown
+                dropdown.innerHTML = optionHTML;
+                document.getElementById("btn-select-content").style.display = "block";
+
+                // Disable the Get Content
+                // until we change a date
+                document.getElementById("btn-get-content").disabled = true;
+            }
+
+            // Function to retrieve the
+            // selected content
+            function showContent(index)
+            {
+                // Get the content details
+                var content = nasaContent[index];
+                var url = content.url;
+                var title = content.title;
+                var media_type = content.media_type;
+
+                // Create HTML content dynamically
+                var html;                
+
+                // Check if we have an image || youtube video
+                if ( media_type == "image" ) {
+
+                    html = '<a href="' + url + '" target="_blank"> <img class="content-nasa" src="' + url + '" alt="' + nasaContent[index].title + '"></a>';
+                }
+                else if ( media_type == "video" ) {
+                    html = '<iframe class="content-nasa" src="' + url + '?controls=0&autoplay=1" title="' + nasaContent[index].title + '"></iframe>';
+                }
+                else {
+                    // Not a recognized media type
+                    // Add some code if and when new ones
+                    // are added
+                }
+
+                // Add the contents to the container
+                document.getElementById("content-click").innerHTML = "<p><small>(Click on " + media_type + " to open in new window)</small><p>";
+                document.getElementById("content-visual").innerHTML = html;
+                document.getElementById("content-title").innerHTML = "<h3>" + content.title + "</h3>";
+                document.getElementById("content-explanation").innerHTML = "<p class=\"explain\">" + content.explanation + "</p>";
+                document.getElementById("content-copyright").innerHTML = "<p class=\"copyright\"><small> &copy Copyright " + content.copyright + "</small></p2>";
+            }  
+
+            // Clear the contents div
+            function clearContent() {
+                var children = document.getElementById("div-content").querySelectorAll("div");
+                for (i = 0; i < children.length; i++)
+                {
+                    child = children[i]; 
+                     child.innerHTML = "";
+                }
+            }
+
+            // Function to make the NASA
+            // APOD call
+            function makeAPIRequest(startDate, endDate) {
+
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+
+                    // Check that the request is finished and was "OK"
+                    if (request.readyState === 4 && request.status === 200) // OK
+                    {
+                        // We received a good response
+                        // Parse & return
+                        var jsonResp = JSON.parse(request.responseText);
+
+                        // Clear any previous alerts
+                        showAlert();
+                       
+                        // Load the image array
+                        loadNASAData(jsonResp);
+
+                    }
+                    else if ( request.status === 500 ) // INTERNAL SERVER ERROR
+                    {
+                        showAlert("Internal Server Error. Try different dates.");
+                    }
+                    else if ( request.status === 400 ) // BAD REQUEST
+                    {
+                        showAlert(request.statusText);
+                    }
+
+                    // Clear loading spinner
+                    showLoad(false);
+                }
+
+                // Setup parameters for the API call
+                var parms = {
+                        api_key: API_KEY,
+                        start_date: formatAPIDate(startDate),
+                        end_date: formatAPIDate(endDate),
+                        hd: true,
+                        thumbs: false,
+                        concept_tags: false
+                    };
+
+                // Create URL
+                var url = API_URL + createAPIParms(parms);
+
+                // Open the connection
+                request.open("GET", url);
+
+                // Set Loading spinner
+                showLoad(true);
+
+                // Send the request
+                request.send();
+            }       
+
+            // Safely encode the params
+            // object
+            function createAPIParms(p) {
+
+                // encode each element of the parms
+                // and join with &
+                var encodeParms = "?" 
+                    + Object.keys(p).map( function(key){ return key + "=" + encodeURIComponent(p[key]) })
+                    .join("&");
+
+                return encodeParms;
+            }
+
+            // Function to show (or hide) spinner while content is loaded
+            function showLoad(show) {
+
+                var btn = document.getElementById("btn-get-content");
+                if (show == true)
+                {
+                    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+                }
+                else
+                {
+                    btn.innerHTML = "Get Content";
+                }
+            }
+
+            // Function to display or clear 
+            // an alert in the error div
+            function showAlert(message) {
+
+                // Get error div
+                var errDiv = document.getElementById("div-errors");
+
+                // Check if we are clearing the div
+                if (message === undefined) {
+                    errDiv.innerHTML = "";
+                    return;
+                }
+
+                // Set alert HTML & display
+                var alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                        message + 
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                errDiv.innerHTML = alert;
+            }        
+
+            // Function to return a date
+            // in YYYY-MM-DD format
+            function formatAPIDate(d) {
+
+                // Need to deal with Timezones
+                var localDate = new Date(d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate());
+                var fDate = new Date( localDate.getTime() - ( localDate.getTimezoneOffset() * 60000) ).toISOString().split("T")[0];
+
+                return fDate;
+            }
+
+            // Functions for Date Handling 
+
+            // Function to setup the date selector
+            // dropdowns 
+            function setupDateControls() {
+
+                // Populates the date selectors
+
+                // Years
+                var elemStart = document.getElementById("start-year");
+                var elemEnd = document.getElementById("end-year");
+
+                var option;
+                for (year = 1995; year <= new Date().getFullYear(); year++)
+                {
+                    option = document.createElement("option");
+                    option.innerText = year;
+                    if (year == startDate.getFullYear()) 
+                    {
+                        option.selected = true;
+                    }
+                    elemStart.appendChild(option);
+
+                    option = document.createElement("option");
+                    option.innerText = year;
+                    if (year == endDate.getFullYear()) 
+                    {
+                        option.selected = true;
+                    }
+                    elemEnd.appendChild(option);
+                }
+
+                // Months
+                elemStart = document.getElementById("start-month");
+                elemEnd = document.getElementById("end-month");
+
+                var option;
+                for (month = 0; month < 12; month++)
+                {
+                    option = document.createElement("option");
+                    option.innerText = ( (month < 9)?"0":"" ) + (month + 1);
+                    if (month == startDate.getMonth()) 
+                    {
+                        option.selected = true;
+                    }
+                    elemStart.appendChild(option);
+
+                    option = document.createElement("option");
+                    option.innerText = ( (month < 9)?"0":"" ) + (month + 1);
+                    if (month == endDate.getMonth()) 
+                    {
+                        option.selected = true;
+                    }
+                    elemEnd.appendChild(option);
+                }
+
+                // Now populate the days
+                // No check necessary
+                populateDays("start", false);
+                populateDays("end", false);
+            }
+
+            // Event handler for date changes
+            function dateChangeHandler(e)
+            {
+                // Handle Year or month change
+                if (e.name == "start-month" || e.name == "start-year" ) {
+                    populateDays("start", false);
+                } 
+                else if (e.name == "end-month" || e.name == "end-year" ) {
+                    populateDays("end", false);
+                }
+
+                // Something has changed, so let's reload days
+                // update the boxes then checkDates
+                checkDates();
+            }
+
+            // Function to check when a user
+            // changes a date
+            function checkDates() 
+            {
+                // Get date from controls
+                var newStartDate = new Date( document.getElementById("start-year").value + "-" + document.getElementById("start-month").value + "-" + document.getElementById("start-day").value)
+                var newEndDate = new Date( document.getElementById("end-year").value + "-" + document.getElementById("end-month").value + "-" + document.getElementById("end-day").value)
+
+                // Disable the Get Button appearance
+                var btn = document.getElementById("btn-get-content");
+                btn.disabled = true;
+
+                // Check dates have changed
+                // This _should_ never happen, but let's check anyway
+                if (newStartDate == startDate && newEndDate == endDate) {
+                    return;
+                }
+                
+                // Check that the selected end date
+                // does not go beyond today
+                var today = new Date(new Date().toDateString()); // 
+                today.setDate(today.getDate());
+
+                var daysDiff = Math.round( (newEndDate.getTime() - today.getTime() ) / (1000 * 3600 * 24) ); 
+
+                // Display error 
+                if ( daysDiff > 0 ) {
+
+                    showAlert("You cannot specify a date in the future.");
+                    return;
+                }
+
+                // Now check we have no more than 31 days
+                // && that the end Date is AFTER the start Date
+                daysDiff = ( newEndDate.getTime() - newStartDate.getTime() ) / (1000 * 3600 * 24); 
+
+                if (daysDiff > 31 || daysDiff < 0) {
+
+                    // Display error 
+                    if (daysDiff > 31) {
+                        showAlert("You can retrieve a maxumum of 31 days' content.");
+                    }
+                    else {
+                        showAlert("End date must be greater than or equal to the start date.");
+                    }
+                    return;
+                }
+
+                // If the dates are valid,
+                // Clear the alert 
+                showAlert(); // No message = clear
+
+                // Enable the Get Content button
+                btn.disabled = false;
+             }
+
+            // Populate days based on month selection
+            function populateDays(startOrEnd, check)
+            {
+                // Determine days in selected Month&Year
+                var numberDays = 0;
+                var selectedMonth = document.getElementById(startOrEnd + "-month").value;
+                var selectedYear = parseInt(document.getElementById(startOrEnd + "-year").value);
+                
+                // Preserve the currently selected day
+                // (May be empty on first parse) 
+                var selectedDay = document.getElementById(startOrEnd + "-day").value
+                if (selectedDay == "")
+                {
+                    selectedDay = (startOrEnd == "start")?startDate.getDate():endDate.getDate();
+                }
+                selectedDay = parseInt(selectedDay);
+          
+                // Check month
+                if (selectedMonth == "01" || selectedMonth == "03" || selectedMonth == "05" || selectedMonth == "07" || selectedMonth == "08" || selectedMonth == "10" || selectedMonth == "12")
+                {
+                    numberDays = 31;                
+                }
+                else if (selectedMonth == "02")
+                {
+                    numberDays = 28;
+                    if (isLeapYear(selectedYear))
+                    {
+                        numberDays = 29;
+                    }
+                }
+                else
+                {
+                    numberDays = 30;
+                }
+
+                // If there are less days than selected day
+                // in the month, go to end of the month
+                selectedDay = (selectedDay > numberDays)?numberDays:selectedDay;
+
+                // Clear the box
+                document.getElementById(startOrEnd + "-day").innerText = "";
+ 
+                var option;
+                for (var day = 1; day <= numberDays; day++)
+                {
+                    option = document.createElement("option");
+                    option.innerText = (day<10)?"0" + day:day;
+                    if (day == selectedDay)
+                    {
+                        option.selected=true;
+                    }
+                    document.getElementById(startOrEnd + "-day").appendChild(option);
+                }
+
+                // Now check dates if need be
+                if (check == true)
+                {   
+                    checkDates();
+                }
+
+                // Leap year function
+                function isLeapYear(year) {
+                    if (year % 4 == 0)
+                    {
+                        if (year % 100 == 0)
+                            {
+                                if (year % 400 == 0)
+                                {
+                                    return true;
+                                }
+                            }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }                
+            }
+        </script>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
