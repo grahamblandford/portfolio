@@ -1,6 +1,6 @@
 # Portfolio
 
-The Portfolio repository aims to showcase some of the skills acquired through various channels. This includes project and assigment work completed as part of the Internet Applications and Web Development program at Fanshawe College in London, Ontario.
+The Portfolio repository aims to showcase some of the skills acquired through various channels. This includes project and assigment work completed as part of the Internet Applications and Web Development program at Fanshawe College in London, Ontario, and is listed most recent first within each category.
 
 # Javascript
 
@@ -38,3 +38,15 @@ As part of the project specification, datepicker controls had to be from scratch
 ![https://github.com/grahamblandford/portfolio/blob/master/iwd/nasa/preview.PNG](https://github.com/grahamblandford/portfolio/blob/master/iwd/nasa/preview.PNG)
 
 [View App](https://info-3114-nasa-apod-api.web.app/) / [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/nasa)
+
+## Funko Pop Store
+
+This project was completed to create a storefront with basic shopping cart functionality using only vanilla HTML/CSS/JS.
+The project specification required the use of dynamically-created HTML tables to represent product information. 
+
+![https://github.com/grahamblandford/portfolio/blob/master/iwd/funko/preview1.PNG](https://github.com/grahamblandford/portfolio/blob/master/iwd/funko/preview1.PNG)
+
+![https://github.com/grahamblandford/portfolio/blob/master/iwd/funko/preview2.PNG](https://github.com/grahamblandford/portfolio/blob/master/iwd/funko/preview2.PNG)
+
+[View App](https://info1232-project.web.app/) / [Code](https://github.com/grahamblandford/portfolio/tree/master/iwd/funko)
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <!-- Final Project for INFO-1232 & INFO-1252
+             April 2nd, 2020
+             Graham Blandford -->
+       
+       <!-- meta tags -->
+       <meta charset="utf-8">
+       <meta name="description" content="Main page for our Funko Pop! Superstore">
+       <meta name="keywords" content="IWD,Fanshawe,INFO-1252,INFO-1232,Project">
+       <meta name="author" content="Graham Blandford">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+        <!-- page title -->
+       <title>Funko Pop! Store - Home</title>
+
+        <!-- font for my "logo"" -->
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
+        <!-- external stylesheet -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- load scripts -->
+        <script src="js/storeitem.js"></script>
+        <script src="js/cartitem.js"></script>
+        <script src="js/currency.js"></script>
+        <script src="js/session.js"></script>
+        <script src="js/script.js"></script>
+
+    </head>
+
+    <body onload="initialize();">
+        <div id="wrap">
+            <!-- header and nav -->
+            <header>
+                <h1>Funko Pop! Superstore</h1>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <hr>
+            
+            <!-- view item section -->
+            <section id="section-viewitem" class="section-display">
+
+                <fieldset>
+                    <legend id="legend-item-name"></legend> <!-- item name -->
+
+                    <div id="div-view-item-image">
+                        <img id = "image-view-item" src="" alt=""><img>
+                    </div>
+                    <label for="tb-product-id">Product ID:</label>
+                    <input type="text" id="tb-product-id" class="tb-view" readonly/>
+                    <br>
+                    <label for="tb-price">Price:</label>
+                    <input type="text" id="tb-price" class="tb-view" readonly/>
+                    <br>
+                    <label for="tb-qty">Available:</label>
+                    <input type="text" id="tb-qty" class="tb-view" readonly/>
+                    <br>
+                    <label for="tb-max">Max. Customer:</label>
+                    <input type="text" id="tb-max" class="tb-view" readonly/>
+                    <br>
+                    <label for="tb-shipping">Shipping:</label>
+                    <input type="text" id="tb-shipping" class="tb-view" readonly/>
+                    <br>
+                    <label for="tb-desc" id="label-desc">Description:</label>
+                    <p id="p-desc"></p>
+                    <label for="p-reviews" id="label-reviews">Reviews:</label>
+                    <p id="p-reviews"></p>
+                    <br>
+                    <label for="tb-add-review">Review this product:</label>
+                    <br>
+                    <textarea id="tb-add-review" rows="4" cols="40"></textarea>
+                    <br>
+                    <button onclick="submitReview();">Submit</button>
+                    <button id="button-hide-viewitem" onclick="hideViewItem();">Close</button>
+                </fieldset>
+            </section>
+
+            <!-- section for category & cart button -->
+            <section id="section-category">
+
+                <!-- button for cart totals -->
+                <button id="button-cart" onclick="document.getElementById('section-carttotal-display').scrollIntoView(false);">No Items in Cart</button>
+
+                <!-- category selector -->
+                <select id="select-category" onchange="displayStoreItems();">
+                    <option selected>All Products</option>
+                    <option>Game of Thrones</option>
+                    <option>Harry Potter</option>
+                    <option>Pulp Fiction</option>
+                </select>
+                
+            </section>
+            
+            <!-- section for products -->
+            <section id="section-storeitem-display" class="section-display"></section>
+            <hr>
+
+            <!-- cart items  -->
+            <section id="section-cartitem-display" class="section-display"></section>
+
+            <!-- cart totals -->
+            <section id="section-carttotal-display" class="section-display">
+                <a name="cart-totals"></a>                
+
+                <fieldset>
+                    <legend>Order Summary</legend>
+
+                    <label for="tb-item-subtotal">Item Total:</label>
+                    <input type="text" id="tb-item-subtotal" class="tb-total" readonly/>
+                    <br>
+                    <label for="tb-est-ship">Plus Shipping:</label>
+                    <input type="text" id="tb-est-ship" class="tb-total" readonly/>
+                    <br>
+                    <br>
+                    <label for="tb-subtotal">Sub-total:</label>
+                    <input type="text" id="tb-subtotal" class="tb-total" readonly/>
+                    <br>
+                    <label for="tb-tax">Plus Taxes:</label>
+                    <input type="text" id="tb-tax" class="tb-total" readonly/>
+                    <br><br>
+                    <label for="tb-order-total">Order Total:</label>
+                    <input type="text" id="tb-order-total" class="tb-total" readonly/>
+                    <br>
+                </fieldset> 
+            </section>
+
+            <!-- section for currency -->
+            <section id="section-bottom" class="section-display">
+                <!-- display a flag -->
+                <img id = "img-currency" src="images/canada.png" alt="currency"/>
+
+                <!-- currency -->
+                <select id="select-currency" onchange="changeCurrency();">
+                </select>
+            </section>
+
+            <!-- section for copyright and back to top link -->
+            <footer>
+                <a href="#">Back to Top</a><br>
+                <p class="session-date-time"></p>
+                <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved</p>
+            </footer>
+        </div>
+    </body>
+</html>
